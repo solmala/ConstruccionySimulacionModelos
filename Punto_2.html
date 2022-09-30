@@ -1,0 +1,38 @@
+<html>
+  <head>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load("current", {packages:["corechart"]});
+
+      var media = 7;
+
+      var datos = [];
+      var Header = ['Ri'];
+      datos.push(Header);
+
+      for(var i = 1; i <= 10000; i++) {
+        var Ri = (-1) * media * Math.log(1 - Math.random());
+        var temp = [];
+        temp.push(Ri);
+
+        datos.push(temp);
+      }
+
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var chartdata = new google.visualization.arrayToDataTable(datos);
+
+        var options = {
+          title: 'Muestra aleatoria con distribución exponencial',
+          legend: { position: 'none' }
+        };
+
+        var chart = new google.visualization.Histogram(document.getElementById('chart_div'));
+        chart.draw(chartdata, options);
+      }
+    </script>
+  </head>
+  <body>
+    <div id="chart_div" style="width: 900px; height: 500px;"></div>
+  </body>
+</html>
