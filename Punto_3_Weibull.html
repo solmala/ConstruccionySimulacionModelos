@@ -4,15 +4,17 @@
     <script type="text/javascript">
       google.charts.load("current", {packages:["corechart"]});
 
+      var forma = 11;
+      var escala = 15;
+
       var datos = [];
       var Header = ['Ri'];
       datos.push(Header);
 
       for(var i = 1; i <= 10000; i++) {
-        var Ri = (-2) * Math.log(1 - Math.random());
+        var Ri = (-1) * nthroot(Math.log(1-Math.random()),forma)/escala;
         var temp = [];
         temp.push(Ri);
-
         datos.push(temp);
       }
 
@@ -21,38 +23,39 @@
         var chartdata = new google.visualization.arrayToDataTable(datos);
 
         var options = {
-          title: 'Muestra aleatoria con distribución de Ji Cuadrado (o Pearson)',
+          title: 'Muestra aleatoria con distribución de Weibull',
           legend: { position: 'none' }
         };
 
         var chart = new google.visualization.Histogram(document.getElementById('chart_div'));
         chart.draw(chartdata, options);
       }
+      
 
       function nthroot(x, n) {
-        try {
-          var negate = n % 2 == 1 && x < 0;
-          if(negate)
-            x = -x;
-          var possible = Math.pow(x, 1 / n);
-          n = Math.pow(possible, n);
-          if(Math.abs(x - n) < 1 && (x > 0 == n > 0))
-            return negate ? -possible : possible;
-        } catch(e){}
-      }
-    </script>
+      try {
+        var negate = n % 2 == 1 && x < 0;
+        if(negate)
+          x = -x;
+        var possible = Math.pow(x, 1 / n);
+        n = Math.pow(possible, n);
+        if(Math.abs(x - n) < 1 && (x > 0 == n > 0))
+          return negate ? -possible : possible;
+      } catch(e){}
+    }</script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
   </head>
   <body class= "container-fluid text-center fs-4 bg-secondary  text-light">
     <h1 class="container text-center text-light">Punto 3</h1>
     <p class="fs-4">Investigue 3 distribuciones de probabilidad diferentes a las revisadas en clase. Genere muestras artificiales para las 3 distribuciones de probabilidad y ejemplifique cada una de estas con casos del mundo real donde se puedan ajustar a cada una de las distribuciones. Graficar. Algunos ejemplos de distribuciones pueden ser: Longnormal, Erlang, Wibull, Cauchy, etc</p>
-    <hr> 
-    <div id="chart_div" style="width: 900px; height: 500px;" class="container"></div>
+    <hr>
+    <div class="container" id="chart_div" style="width: 900px; height: 500px;"></div>
     <hr>
     <div class="container">
-        <button type="button" class="btn btn-primary"><a href="index.html"  class="text-light">Volver</a></button>    
-        <button type="button" class="btn btn-primary"><a href="Punto_3_Weibull.html"  class="text-light">Distribución Weibull</a></button>
+        <button type="button" class="btn btn-primary"><a href="index.html"  class="text-light">Volver</a></button>
         <button type="button" class="btn btn-primary"><a href="Punto_3_Arcoseno.html"  class="text-light">Distribución Arcoseno</a></button>
-    </div>    
+        <button type="button" class="btn btn-primary"><a href="Punto_3_Ji_Cuadrado.html"  class="text-light">Distribución Ji Cuadrado</a></button>
+    </div>
+    
   </body>
 </html>

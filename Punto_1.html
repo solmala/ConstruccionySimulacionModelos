@@ -1,5 +1,11 @@
 <html>
     <head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    </head>
+    <body class= "container-fluid text-center fs-6 bg-secondary text-light">
+        <h1 class="container text-center text-light">Punto 1</h1>
+        <p class="fs-4">Construir una pieza de software que permita calcular la integral de una función por el método de Montecarlo explicado en clase. El modelo deberá permitir ver gráficamente como se va realizando el cálculo. Utilice la herramienta de generación de gráficos que considere más adecuada. </p>
+        <hr>
         <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
         <script type="text/javascript">
             google.charts.load('current', {'packages':['corechart']});
@@ -70,10 +76,10 @@
                 chart.draw(chartdata, options);
             }            
         </script>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
-    </head>
-    <body class= "container-fluid text-center fs-4" style="background-color: Gainsboro;">
+        <hr>
         <div id="chart_div" class= "container-fluid border p-1" style="width: 700px; height: 700px; background-color: black;"></div>
         <div><button type="button" class="btn btn-primary"><a href="index.html"  class="text-light">Volver</a></button></div>
+
+        
     </body>
 </html>
