@@ -1,0 +1,77 @@
+<html>
+    <head>
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <script type="text/javascript">
+            google.charts.load('current', {'packages':['corechart']});
+
+            var n = 1000000;
+            var a = 5;
+            var b = 8;
+            var c = 0;
+            var d = 5;
+            var x, y;
+            var areaC = (b - a) * (d - c);
+            var cont = 0;
+
+            document.write("ÁREA DEL RECTÁNGULO: " + areaC + "<br>");
+            document.write("CANTIDAD DE PUNTOS TOTALES: " + n + "<br>");
+
+            var datos = [];
+            var Header = ['X', 'Punto aleatorio', 'f(x)'];
+            datos.push(Header);
+            
+            for (let i = 1; i <= n; i++) {
+                
+                x = ((b - a) * Math.random()) + a;
+                
+                y = ((d - c) * Math.random()) + c;
+                
+
+                if(y <= func(x)) {
+                    cont = cont + 1;
+                }
+
+                if((i % 1000) == 0) {
+                    var temp = [];
+                    temp.push(x);
+                    temp.push(y);
+                    temp.push(func(x));
+                    datos.push(temp);
+                }
+                
+            }
+
+            var integral = areaC * (cont / n);
+            document.write("CANTIDAD DE PUNTOS DEBAJO DE LA CURVA: " + cont + "<br>");
+            document.write("INTEGRAL: " + integral);
+            
+            google.charts.setOnLoadCallback(drawChart);
+
+            function func(varX) {
+                return (64 / (16 + (Math.pow((varX - 8), 2))));
+            }
+
+            function drawChart() {
+
+                var chartdata = new google.visualization.arrayToDataTable(datos);
+
+                var options = {
+                    title: 'Montecarlo',
+                    hAxis: {title: 'Valores de X', minValue: 5, maxValue: 8},
+                    vAxis: {title: 'Valores de Y', minValue: 0, maxValue: 5},
+                    legend: 'yo que se',
+                    seriesType: 'scatter',
+                    series: {1: {type: 'function'}},
+                    pointSize: 4
+                };
+
+                var chart = new google.visualization.ComboChart(document.getElementById('chart_div'));
+
+                chart.draw(chartdata, options);
+            }
+        </script>
+    </head>
+    <body>
+        <div id="chart_div" style="width: 700px; height: 700px;"></div>
+    </body>
+</html>
